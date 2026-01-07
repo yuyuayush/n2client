@@ -4,13 +4,9 @@ interface RequestOptions extends RequestInit {
     headers?: Record<string, string>;
 }
 
-/**
- * Generic Fetch Wrapper
- * Handles base URL, default headers, and error parsing.
- */
+
 async function request<T>(endpoint: string, options: RequestOptions = {}): Promise<T> {
-    // If endpoint starts with /api/, it's a Next.js server-side route (internal), so use relative URL (or current origin)
-    // Otherwise, append to external API_BASE_URL (NestJS)
+   
     const isInternalApi = endpoint.startsWith('/api/');
     const url = isInternalApi ? endpoint : `${API_BASE_URL}${endpoint}`;
 
